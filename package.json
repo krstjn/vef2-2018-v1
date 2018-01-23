@@ -11,7 +11,9 @@
     "eslint-plugin-import": "^2.8.0"
   },
   "dependencies": {
+    "ejs": "^2.5.7",
     "express": "^4.16.2",
-    "ejs": "^2.5.7"
+    "front-matter": "^2.3.0",
+    "markdown-it": "^8.4.0"
   }
 }
