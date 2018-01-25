@@ -1,5 +1,5 @@
-const fs = require('fs')
-
+const fs = require('fs');
+const util = require('util');
 const express = require('express');
 const path = require('path');
 const MarkdownIt = require('markdown-it');
@@ -7,35 +7,76 @@ const fm = require('front-matter');
 
 const app = express();
 
+const readFileAsync = util.promisify(fs.readFile);
+
 const hostname = '127.0.0.1';
 const port = 3000;
 const encoding = 'utf8';
-function read(file) {
-  const data = fs.readFileSync(file)
-
-  return data.toString(encoding);
+// Lesa inn skrá
+async function read(file) {
+  try {
+    const data = await readFileAsync(file)
+    return data.toString(encoding);
+  } catch (e) {
+    console.log(e);
+  }
 }
 
-function write(content) {
-  const md = new MarkdownIt();
+// Skrifa skrána á html format
+async function extFront(content) {
   const front = fm(content);
-  console.log(front);
-  const result = md.render(front.body);
-  return result;
+  console.log(front.attributes.slug);
+  console.log(front.attributes.title);
+
+  return front;
 }
-const input = 'articles/batman-ipsum.md';
-const data = read(input);
+const files = [];
+// Lesa innhald í möppunni articles
+const mappa = fs.readdirSync(path.join(__dirname, 'articles'));
+mappa.forEach(item => {
+    if(item.match(/\.md/)){
+    files.push(item);
+  }
+})
+console.log(files);
+const input = 'articles/lorem-ipsum.md';
+// const data = read(input);
+// const mdfm = write(data);
 
-app.set('views', path.join(__dirname, 'views'));
-app.use(express.static(path.join(__dirname, 'public')));
 
-app.set('view engine', 'ejs');
 
-app.get('/', (req, res) => {
-  const body = write(data);  
-  res.render('index', { title: 'Forsíða', body});
-});
+async function main() {
+  let data = '';
+  try {
+    data = await read(input);
 
-app.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
+  } catch (e) {
+    console.error('error', e);
+  }
+  const mdfm = await extFront(data);
+  
+  app.set('views', path.join(__dirname, 'views'));
+
+  app.use(express.static(path.join(__dirname, 'public')));
+  app.use('/img', express.static(path.join(__dirname, 'articles/img')));
+
+
+  app.set('view engine', 'ejs');
+
+  // Skrifa gögn úr body í index.html
+  app.get('/', (req, res,next) => {
+
+    const md = new MarkdownIt();
+
+    const article = md.render(mdfm.body);
+    res.render('index', { title: 'Greinasafnið', article});
+  });
+
+  app.listen(port, hostname, () => {
+    console.log(`Server running at http://${hostname}:${port}/`);
+  });
+}
+
+main().catch(err => {
+   console.error(err);
 });
