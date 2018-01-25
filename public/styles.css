@@ -4,6 +4,7 @@
 }
 
 html {
+  font-size: 16px;
   box-sizing: border-box;
 }
 
@@ -14,12 +15,54 @@ html {
 }
 
 body {
-  margin: 20px;
-  font-family: 'Lora', serif;
+  margin: 0 auto;
+  font-family: 'Lora', serif;  
+  background-color: #eee;
+  color: #333;
+  font-size: 16px;
+  max-width: 1200px;
 }
-
+main {
+  z-index: 1;
+  padding: 20px;
+}
 h1,
 h2,
 h3 {
   font-family: 'Roboto', sans-serif;
 }
+
+p {
+  margin: 15px 0;
+}
+
+img {
+  max-width: 1200px;
+  width: 100%;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+
+  margin-bottom: 2em;
+  padding: 2em;
+
+  width: 100%;
+  min-height: 500px;
+
+  background: transparent url(header.jpg) no-repeat 50% 50%;
+  background-size: cover;
+}
+
+header .hero {
+  margin: auto;
+}
+header .hero__title {
+  color: #fff;
+  font-size: 5rem;
+}
+
+  blockquote p{
+    font-style: italic;
+  }
