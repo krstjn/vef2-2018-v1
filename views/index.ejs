@@ -1,6 +1,16 @@
 <%- include('header') -%>
-<main>
-    <%- article %>
-</main>
-
+<div class="cards">
+<% filterFM.forEach((item) => { %>
+    <a href="./<%= item.slug %>">
+        <div class="card">
+            <div clas="card__image">
+                <% if(item.image){ %> <img src="<%= item.image %>" alt=""><% }else{ %><% } %>
+            </div>
+            <h2><%= item.title %></h2>
+            <p><%= moment(item.date).format( 'DD.MM.YYYY') %></p>
+        </div>
+    </a>
+  <% }) %>
+</div>
+  
 <%- include('footer') -%>
