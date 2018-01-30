@@ -8,13 +8,15 @@
   "devDependencies": {
     "eslint": "^4.16.0",
     "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-plugin-import": "^2.8.0"
+    "eslint-plugin-import": "^2.8.0",
+    "moment": "^2.10.0"    
   },
   "dependencies": {
     "ejs": "^2.5.7",
     "express": "^4.16.2",
     "front-matter": "^2.3.0",
     "markdown-it": "^8.4.0",
-    "nodemon": "^1.14.11"
+    "nodemon": "^1.14.11",
+    "moment": "^2.10.0"
   }
 }
