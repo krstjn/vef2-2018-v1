@@ -16,16 +16,18 @@ html {
 
 body {
   margin: 0 auto;
-  font-family: 'Lora', serif;  
+  font-family: 'Lora', serif;
   background-color: #eee;
   color: #333;
   font-size: 16px;
   max-width: 1200px;
 }
+
 main {
   z-index: 1;
   padding: 20px;
 }
+
 h1,
 h2,
 h3 {
@@ -44,13 +46,10 @@ img {
 header {
   display: flex;
   flex-direction: column;
-
   margin-bottom: 2em;
   padding: 2em;
-
   width: 100%;
   min-height: 500px;
-
   background: transparent url(header.jpg) no-repeat 50% 50%;
   background-size: cover;
 }
@@ -58,11 +57,19 @@ header {
 header .hero {
   margin: auto;
 }
+
 header .hero__title {
   color: #fff;
   font-size: 5rem;
 }
 
-  blockquote p{
-    font-style: italic;
+@media (max-width: 600px) {
+  header .hero__title {
+    color: #fff;
+    font-size: 3rem;
   }
+}
+
+blockquote p {
+  font-style: italic;
+}
