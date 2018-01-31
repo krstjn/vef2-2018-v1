@@ -4,10 +4,12 @@
     <a href="./<%= item.slug %>">
         <div class="card">
             <div clas="card__image">
-                <% if(item.image){ %> <img src="<%= item.image %>" alt=""><% }else{ %><% } %>
+                <% if(item.image){ %> <img src="<%= item.image %>" alt=""><% }else{ %> <span class="card__fill"></span> <% } %>
             </div>
-            <h2><%= item.title %></h2>
-            <p><%= moment(item.date).format( 'DD.MM.YYYY') %></p>
+            <div class="card__content">
+                <h2><%= item.title %></h2>
+                <p><%= moment(item.date).format( 'DD.MM.YYYY') %></p>
+            </div>
         </div>
     </a>
   <% }) %>
