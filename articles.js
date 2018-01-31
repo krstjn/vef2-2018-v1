@@ -47,7 +47,9 @@ router.get('/:slug', async (req, res, next) => {
     next(e);
   }
 });
-
+router.get('/:slug', (req, res) => {
+  res.render('article', { title: 'Villa síða fannst ekki', article: ''});
+});
 router.get('/', async (req, res, next) => {
   try {
     const folder = await readDir(path.join(__dirname, 'articles'));
