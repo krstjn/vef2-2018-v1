@@ -34,6 +34,12 @@ h2,
 h3 {
   font-family: 'Roboto', sans-serif;
 }
+h1 {
+  font-size: 2rem;
+}
+h2 {
+  font-size: 1.5rem;
+}
 
 p {
   margin: 15px 0;
@@ -62,7 +68,7 @@ header .hero {
 
 header .hero__title {
   color: #fff;
-  font-size: 5rem;
+  font-size: 3rem;
 }
 
 blockquote p {
@@ -76,7 +82,7 @@ blockquote p {
 }
 .cards a{
   text-decoration: none;
-  color: #000;
+  color: #333;
 }
 
 .card{
@@ -95,7 +101,9 @@ blockquote p {
   min-width: 200px;
   max-width: 100%;
 }
-
+/* .card__content {
+  color: #333;
+} */
 .card__image .card__fill{
 
 }
@@ -108,11 +116,15 @@ blockquote p {
   margin: auto;
   color: #333;
 }
+.message {
+  width: 100%;
+  text-align: center;
+}
 @media (min-width: 650px) {
-  header .hero__title {
+  /* header .hero__title {
     color: #fff;
     font-size: 3rem;
-  }
+  } */
   .card {
     width: 50%
   }
