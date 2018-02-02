@@ -27,29 +27,30 @@ router.get('/:slug', async (req, res, next) => {
   try {
     const folder = await readDir(path.join(__dirname, 'articles'));
     const filteredFiles = folder.filter(item => item.includes('.md'));
-    const filesRead = filteredFiles.map(item => read(path.join(__dirname, 'articles', item)));
+    const filesRead = filteredFiles.map(item =>
+      read(path.join(__dirname, 'articles', item)));
     const files = await Promise.all(filesRead.map(async item => item.then(file => fm(file.toString(encoding)))));
     const findSlug = files.filter(item => item.attributes.slug === req.params.slug);
     const file = findSlug[0];
+    console.log(file);
     if (file === undefined) {
       next();
     }
-    console.log(file);
 
-    console.log('file.body');
-    console.log(file.body);
     const md = new MarkdownIt();
+    console.log(file.body);
     const article = md.render(file.body);
-    const title = file.attributes.title;
-    res.render('article', { title, article });
+    res.render('article', { title: file.attributes.title, article });
   } catch (e) {
     console.log(e);
     next(e);
   }
 });
+
 router.get('/:slug', (req, res) => {
-  res.render('article', { title: 'Villa síða fannst ekki', article: ''});
+  res.render('notfound', { title: 'Fannst ekki', message: 'Ó nei, efnið fannst ekki' });
 });
+
 router.get('/', async (req, res, next) => {
   try {
     const folder = await readDir(path.join(__dirname, 'articles'));
@@ -59,12 +60,15 @@ router.get('/', async (req, res, next) => {
       item.then(file => fm(file.toString(encoding)))));
     const filterFM = files.map(item => item.attributes);
     filterFM.sort((d1, d2) => new Date(d2.date).getTime() - new Date(d1.date).getTime());
-    console.log(filterFM);
- 
+
     res.render('index', { title: 'Greinasafnið', filterFM, moment });
   } catch (e) {
     next(e);
   }
+});
+
+router.get('/', (req, res) => {
+  res.render('articles', { title: 'Villa kom upp' });
 });
 
 module.exports = router;
