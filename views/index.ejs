@@ -10,7 +10,7 @@
             </div>
             <div class="card__content">
               <h2><%= item.title %></h2>
-              <p><%= moment(item.date).format( 'DD.MM.YYYY') %></p>
+              <p><%= moment(Date.parse(item.date)).format('DD.M.YYYY') %></p>
             </div>
           </a>
         </div>
