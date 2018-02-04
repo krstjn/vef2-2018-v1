@@ -22,7 +22,6 @@ async function read(file) {
   }
 }
 
-// const mdFiles = folder.filter(item => item.includes('.md'));
 router.get('/:slug', async (req, res, next) => {
   try {
     const folder = await readDir(path.join(__dirname, 'articles'));
