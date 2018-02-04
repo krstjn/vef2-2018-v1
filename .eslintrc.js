@@ -4,7 +4,7 @@ module.exports = {
     node: true,
   },
   rules: {
-    'no-console': ['error', { allow: ['info', 'warn', 'error'] }],
+    'no-console': ['error', { allow: ['info', 'log', 'warn', 'error'] }],
     'linebreak-style': 0,
   }
 };

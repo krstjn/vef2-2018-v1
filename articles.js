@@ -17,7 +17,7 @@ async function read(file) {
     const data = await readFile(file);
     return data.toString(encoding);
   } catch (e) {
-    console.log(e);
+    console.error(e);
     return e;
   }
 }
@@ -37,12 +37,11 @@ router.get('/:slug', async (req, res, next) => {
       next();
     } else {
       const md = new MarkdownIt();
-      // console.log(file.body);
       const article = md.render(file.body);
       res.render('article', { title: file.attributes.title, article });
     }
   } catch (e) {
-    console.log(e);
+    console.error(e);
     next(e);
   }
 });
@@ -60,10 +59,10 @@ router.get('/', async (req, res, next) => {
       item.then(file => fm(file.toString(encoding)))));
     const filterFM = files.map(item => item.attributes);
     filterFM.sort((d1, d2) => new Date(d2.date).getTime() - new Date(d1.date).getTime());
-
     res.render('index', { title: 'Greinasafnið', filterFM, moment });
   } catch (e) {
-    next(e);
+    console.error(e);
+    next();
   }
 });
 
